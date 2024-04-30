@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 export type QuoteType = {
   content: string;
+  author: string;
   likes: number;
   dislikes: number;
 };

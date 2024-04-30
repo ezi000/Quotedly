@@ -1,24 +1,41 @@
 import { addQuote, selectQuotes } from "../../features/quotes/quotesSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { useState } from "react";
-import { QuoteType } from "../../features/quotes/quotesSlice";
+
+import { useFormik } from "formik";
+
 export const QuotesList = () => {
   const quotes = useAppSelector(selectQuotes);
   const dispatch = useAppDispatch();
-  const [quoteToAdd, setQuoteToAdd] = useState<QuoteType>({
-    content: "",
-    likes: 0,
-    dislikes: 0,
+  const formik = useFormik({
+    initialValues: {
+      content: "",
+      author: "",
+      likes: 0,
+      dislikes: 0,
+    },
+    onSubmit: (values) => {
+      dispatch(
+        addQuote({
+          content: values.content,
+          author: "",
+          likes: 0,
+          dislikes: 0,
+        })
+      );
+    },
   });
 
   return (
     <>
-      <input
-        type="text"
-        value={quoteToAdd.content}
-        onChange={(e) => setQuoteToAdd(e.target.value)}
-      ></input>
-      <button onClick={() => dispatch(addQuote(quoteToAdd))}>Add quote</button>
+      <form onSubmit={formik.handleSubmit}>
+        <input
+          id="content"
+          type="text"
+          value={formik.values.content}
+          onChange={formik.handleChange}
+        ></input>
+        <button type="submit">Add quote</button>
+      </form>
       <ul>
         {quotes.map((quote, index) => (
           <li key={index}>{quote.content}</li>
