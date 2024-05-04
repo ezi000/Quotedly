@@ -22,9 +22,12 @@ export const quotesSlice = createSlice({
     addQuote: (state, action: PayloadAction<QuoteType>) => {
       state.quotes.push(action.payload);
     },
+    setQuotes: (state, action: PayloadAction<QuoteType[]>) => {
+      state.quotes = action.payload;
+    },
   },
 });
 
-export const { addQuote } = quotesSlice.actions;
+export const { addQuote, setQuotes } = quotesSlice.actions;
 export const selectQuotes = (state: RootState) => state.quotes.quotes;
 export default quotesSlice.reducer;
