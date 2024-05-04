@@ -1,46 +1,24 @@
-import { addQuote, selectQuotes } from "../../features/quotes/quotesSlice";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-
-import { useFormik } from "formik";
+import styled from "styled-components";
+import { useAppSelector } from "../../app/hooks";
+import { selectQuotes } from "../../features/quotes/quotesSlice";
 
 export const QuotesList = () => {
   const quotes = useAppSelector(selectQuotes);
-  const dispatch = useAppDispatch();
-  const formik = useFormik({
-    initialValues: {
-      content: "",
-      author: "",
-      likes: 0,
-      dislikes: 0,
-    },
-    onSubmit: (values) => {
-      dispatch(
-        addQuote({
-          content: values.content,
-          author: "",
-          likes: 0,
-          dislikes: 0,
-        })
-      );
-    },
-  });
-
   return (
     <>
-      <form onSubmit={formik.handleSubmit}>
-        <input
-          id="content"
-          type="text"
-          value={formik.values.content}
-          onChange={formik.handleChange}
-        ></input>
-        <button type="submit">Add quote</button>
-      </form>
-      <ul>
+      <StyledQuotesList>
         {quotes.map((quote, index) => (
           <li key={index}>{quote.content}</li>
         ))}
-      </ul>
+      </StyledQuotesList>
     </>
   );
 };
+
+const StyledQuotesList = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  width: 50vw;
+`;
