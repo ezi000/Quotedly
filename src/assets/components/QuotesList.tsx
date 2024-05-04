@@ -6,6 +6,7 @@ import Paper from "@mui/material/Paper";
 
 export const QuotesList = () => {
   const quotes = useAppSelector(selectQuotes);
+  //może dodaj do local storage, żeby były w pamięci
   useGetQuotes();
   if (quotes.length == 0) {
     return <h1>Loading...</h1>;
