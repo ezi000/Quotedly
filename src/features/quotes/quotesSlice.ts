@@ -21,6 +21,7 @@ export const quotesSlice = createSlice({
   reducers: {
     addQuote: (state, action: PayloadAction<QuoteType>) => {
       state.quotes.push(action.payload);
+      localStorage.setItem("quotes", JSON.stringify(state.quotes));
     },
     setQuotes: (state, action: PayloadAction<QuoteType[]>) => {
       state.quotes = action.payload;

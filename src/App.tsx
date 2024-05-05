@@ -22,7 +22,6 @@ const BodyDiv = styled.div`
   height: fit-content;
   padding: 5rem 0 3rem 0;
   gap: 2rem;
-  background-color: #edede9;
 `;
 
 export default App;
