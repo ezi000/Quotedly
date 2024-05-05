@@ -6,7 +6,7 @@ import Paper from "@mui/material/Paper";
 
 export const QuotesList = () => {
   const quotes = useAppSelector(selectQuotes);
-  //może dodaj do local storage, żeby były w pamięci
+
   useGetQuotes();
   if (quotes.length == 0) {
     return <h1>Loading...</h1>;
@@ -16,7 +16,10 @@ export const QuotesList = () => {
       <StyledQuotesList>
         {quotes.map((quote, index) => (
           <StyledQuote elevation={1} key={index}>
-            {quote.content}
+            <div>
+              {index + 1}. {quote.content}
+            </div>
+            <StyledQuoteAuthor>{quote.author}</StyledQuoteAuthor>
           </StyledQuote>
         ))}
       </StyledQuotesList>
@@ -24,6 +27,10 @@ export const QuotesList = () => {
   );
 };
 
+const StyledQuoteAuthor = styled.div`
+  font-size: 0.7rem;
+  color: #777;
+`;
 const StyledQuotesList = styled.div`
   display: flex;
   align-items: flex-start;
@@ -34,11 +41,13 @@ const StyledQuotesList = styled.div`
 
 const StyledQuote = styled(Paper)`
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
+  gap: 0.2rem;
   flex-wrap: wrap;
   padding: 1rem;
   font-size: 1.5rem;
-  width: 30vw;
+  width: 50vw;
   @media (max-width: 768px) {
     font-size: 1.2rem;
     width: 70vw;

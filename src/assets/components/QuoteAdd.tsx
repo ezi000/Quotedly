@@ -4,9 +4,11 @@ import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 export const QuoteAdd = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       content: "",
@@ -14,6 +16,7 @@ export const QuoteAdd = () => {
       likes: 0,
       dislikes: 0,
     },
+
     onSubmit: (values) => {
       dispatch(
         addQuote({
@@ -23,6 +26,7 @@ export const QuoteAdd = () => {
           dislikes: 0,
         })
       );
+      navigate("/");
     },
   });
 

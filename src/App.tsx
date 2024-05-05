@@ -1,30 +1,28 @@
-import store from "./app/store";
-import { Provider } from "react-redux";
 import styled from "styled-components";
 import { QuotesList } from "./assets/components/QuotesList";
 import { NavBar } from "./assets/components/NavBar";
-
+import { Description } from "./assets/components/Description";
 function App() {
   return (
     <>
-      <Provider store={store}>
-        <BodyDiv>
-          <NavBar />
-          <QuotesList />
-        </BodyDiv>
-      </Provider>
+      <BodyDiv>
+        <NavBar />
+        <Description />
+        <QuotesList />
+      </BodyDiv>
     </>
   );
 }
 
 const BodyDiv = styled.div`
   display: flex;
+  margin: 0;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
-  padding-top: 5rem;
+  height: fit-content;
+  padding: 5rem 0 3rem 0;
   gap: 2rem;
+  background-color: #edede9;
 `;
 
 export default App;
